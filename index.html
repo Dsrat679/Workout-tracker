@@ -40,7 +40,7 @@
 <header>
   <div class="wrap">
     <h1>Dustin Workout Tracker</h1>
-    <div class="sub">Recovery-based rotation • offline • quick logging</div>
+    <div class="sub">Fat loss · full gym · cables & DBs · recovery rotation</div>
   </div>
 </header>
 
@@ -69,19 +69,17 @@
       </div>
       <div style="flex: 1 1 240px;">
         <label>&nbsp;</label>
-        <button class="btn" id="saveSessionBtn">Save Session</button>
+        <button class="btn" id="saveSessionBtn" style="width: 100%;">Save Session</button>
       </div>
     </div>
 
-    <div class="card" style="margin-top: 12px; background: rgba(255,255,255,0.04);" id="exercisesArea">
-      <!-- exercises injected -->
-    </div>
+    <div class="card" style="margin-top: 12px; background: rgba(255,255,255,0.04);" id="exercisesArea"></div>
 
     <div style="margin-top:12px;">
       <label for="sessionNotes">Session notes (optional)</label>
       <textarea id="sessionNotes" placeholder="Energy, pumps, joints, sleep, etc."></textarea>
       <div class="small muted" style="margin-top:6px;">
-        Tip: tap a weight field and use the iOS number keypad. Use notes to track recovery readiness.
+        Tip: keep rest times tight (45–60s) to maximise calorie burn. Log effort in notes.
       </div>
     </div>
   </section>
@@ -134,64 +132,118 @@
 
 <script>
   const PLAN = [
-    { key:"Chest", title:"Chest (14 sets)", notes:"Rest 60–90s on presses, 45–60s on isolation. Keep pushups clean.",
-      exercises:[
-        {name:"Incline DB Press", sets:4, repRange:"8–12"},
-        {name:"Flat DB Press", sets:4, repRange:"8–12"},
-        {name:"Pec Deck", sets:3, repRange:"12–15"},
-        {name:"Pushups", sets:3, repRange:"AMRAP (controlled)"},
-      ]},
-    { key:"Back", title:"Back (16 sets)", notes:"Rows: 90s on heavy sets. Pullups assisted OK. Rear delts strict.",
-      exercises:[
-        {name:"Reverse Grip Barbell Row", sets:4, repRange:"6 (heavy)"},
-        {name:"Wide Grip Barbell Row", sets:3, repRange:"8–10"},
-        {name:"Pullups", sets:3, repRange:"AMRAP (assist as needed)"},
-        {name:"Close Grip Pulldown", sets:3, repRange:"10–12"},
-        {name:"Rear Delt Machine / Raises", sets:3, repRange:"12–15"},
-      ]},
-    { key:"Rest", title:"Rest / Zone 2 Only", notes:"30 min Zone 2. Mobility + easy core optional. No lifting today.", exercises:[] },
-    { key:"Legs", title:"Legs (17 sets)", notes:"Deadlifts controlled. Keep RDL form tight. Curls fill the knee-flexion gap.",
-      exercises:[
-        {name:"Barbell Deadlift", sets:4, repRange:"5–6"},
-        {name:"Front Squat (Smith or Free)", sets:4, repRange:"6–10"},
-        {name:"Bulgarian Split Squat", sets:3, repRange:"8–10 / leg"},
-        {name:"Romanian Deadlift (DB/BB)", sets:3, repRange:"8–12"},
-        {name:"Hamstring Curl (lying/seated)", sets:3, repRange:"10–15"},
-      ]},
-    { key:"Shoulders", title:"Shoulders (14 sets)", notes:"Front raises omitted (redundant). Focus on laterals + rear delts.",
-      exercises:[
-        {name:"Barbell Push Press", sets:4, repRange:"3–5"},
-        {name:"Seated DB Press", sets:3, repRange:"8–10"},
-        {name:"DB Lateral Raises", sets:4, repRange:"12–15"},
-        {name:"Rear Delt Raises / Machine", sets:3, repRange:"12–15"},
-      ]},
-    { key:"Rest2", title:"Rest / Zone 2 Only", notes:"30 min Zone 2. Optional stretching. Treat it like training.", exercises:[] },
-    { key:"Arms", title:"Arms (12–14 sets)", notes:"Cable overhead is the main triceps mover. Finishers only if recovered.",
-      exercises:[
-        {name:"DB Hammer Curl (heavy)", sets:3, repRange:"6–8"},
-        {name:"Preacher Curl", sets:3, repRange:"8–12"},
-        {name:"Cable Overhead Triceps Extension", sets:3, repRange:"8–12"},
-        {name:"Skull Crushers", sets:3, repRange:"8–12"},
-        {name:"Optional: Close-Grip Pushups", sets:2, repRange:"AMRAP (optional)"},
-      ]},
-    { key:"RestOpt", title:"Optional Rest / Zone 2 Only", notes:"If joints feel beat up or sleep was poor, take this day. Otherwise go to Chest next.", exercises:[] },
+    {
+      key: "Chest",
+      title: "Chest (15 sets)",
+      notes: "Short rest 45–60s to keep heart rate up. Cables keep constant tension — don't rush the stretch.",
+      exercises: [
+        { name: "Cable Flat Chest Fly", sets: 4, repRange: "12–15" },
+        { name: "Incline DB Press", sets: 4, repRange: "10–12" },
+        { name: "Cable Low-to-High Fly", sets: 3, repRange: "12–15" },
+        { name: "DB Pullover (chest focus)", sets: 2, repRange: "12–15" },
+        { name: "Push-Up Finisher", sets: 2, repRange: "AMRAP" },
+      ]
+    },
+    {
+      key: "Back",
+      title: "Back (15 sets)",
+      notes: "Drive elbows back, not hands. Cable rows: pause 1s at contraction. Keep pulldowns smooth.",
+      exercises: [
+        { name: "Cable Seated Row (wide grip)", sets: 4, repRange: "10–12" },
+        { name: "DB Single-Arm Row", sets: 3, repRange: "10–12 / side" },
+        { name: "Cable Pulldown (underhand)", sets: 3, repRange: "10–12" },
+        { name: "Cable Straight-Arm Pulldown", sets: 3, repRange: "12–15" },
+        { name: "DB Rear Delt Row", sets: 2, repRange: "15–20" },
+      ]
+    },
+    {
+      key: "Rest",
+      title: "Rest / Zone 2 Only",
+      notes: "30 min Zone 2 cardio. Mobility + easy core optional. No lifting today.",
+      exercises: []
+    },
+    {
+      key: "Legs",
+      title: "Legs (16 sets)",
+      notes: "Heels elevated on goblet squat — use plates or a wedge. Full ROM on extensions/curls. Leg press: controlled descent, don't lock out at top.",
+      exercises: [
+        { name: "Raised Heel Goblet Squat (DB)", sets: 4, repRange: "10–12" },
+        { name: "Leg Press (Machine)", sets: 4, repRange: "10–12" },
+        { name: "Cable Leg Extension", sets: 4, repRange: "12–15" },
+        { name: "Cable / Machine Leg Curl", sets: 4, repRange: "10–15" },
+      ]
+    },
+    {
+      key: "Shoulders",
+      title: "Shoulders (14 sets)",
+      notes: "Laterals are the priority for width. Cable laterals keep tension at the bottom. Keep rest short — 45s on isolation.",
+      exercises: [
+        { name: "DB Arnold Press", sets: 4, repRange: "10–12" },
+        { name: "Cable Lateral Raise", sets: 4, repRange: "12–15 / side" },
+        { name: "DB Lateral Raise", sets: 3, repRange: "15–20" },
+        { name: "Cable Face Pull", sets: 3, repRange: "15–20" },
+      ]
+    },
+    {
+      key: "Rest2",
+      title: "Rest / Zone 2 Only",
+      notes: "30 min Zone 2. Optional stretching. Treat it like training.",
+      exercises: []
+    },
+    {
+      key: "Arms",
+      title: "Arms (14 sets)",
+      notes: "Superset biceps + triceps to save time and keep HR up. Cable movements keep constant tension throughout the rep.",
+      exercises: [
+        { name: "Cable Curl (straight bar)", sets: 3, repRange: "10–12" },
+        { name: "DB Hammer Curl", sets: 3, repRange: "10–12" },
+        { name: "Cable Overhead Triceps Extension", sets: 3, repRange: "10–12" },
+        { name: "Cable Triceps Pushdown (rope)", sets: 3, repRange: "12–15" },
+        { name: "DB Concentration Curl", sets: 2, repRange: "12–15" },
+      ]
+    },
+    {
+      key: "RestOpt",
+      title: "Optional Rest / Zone 2 Only",
+      notes: "If joints feel beat up or sleep was poor, take this day. Otherwise go to Chest next.",
+      exercises: []
+    },
   ];
 
   const STORE_KEY = "dustin_workout_tracker_v1";
-  const loadState = () => { try { const raw = localStorage.getItem(STORE_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; } };
-  const saveState = (s) => localStorage.setItem(STORE_KEY, JSON.stringify(s));
   const todayISO = () => new Date().toISOString().slice(0,10);
   const defaultState = { pointer:0, units:"lb", restMode:"fixed", draft:{}, history:[] };
-  let state = loadState() || defaultState;
+  
+  const loadState = () => { 
+    try { 
+      const raw = localStorage.getItem(STORE_KEY); 
+      return raw ? JSON.parse(raw) : null; 
+    } catch { 
+      return null; 
+    } 
+  };
+  
+  const saveState = (s) => localStorage.setItem(STORE_KEY, JSON.stringify(s));
+  let state = loadState() || JSON.parse(JSON.stringify(defaultState));
 
   const $ = (id) => document.getElementById(id);
 
-  function setPointer(idx){ if(idx<0) idx=PLAN.length-1; if(idx>=PLAN.length) idx=0; state.pointer=idx; saveState(state); render(); }
-  function ensureDraftForDay(dayKey){ if(!state.draft[dayKey]) state.draft[dayKey]={}; }
+  function setPointer(idx){ 
+    if(idx<0) idx=PLAN.length-1; 
+    if(idx>=PLAN.length) idx=0; 
+    state.pointer=idx; 
+    saveState(state); 
+    render(); 
+  }
+  
+  function ensureDraftForDay(dayKey){ 
+    if(!state.draft[dayKey]) state.draft[dayKey]={ textNotes: "", logDate: todayISO() }; 
+  }
 
   function renderDaySelect(){
     const sel=$("daySelect"); sel.innerHTML="";
-    PLAN.forEach((d,idx)=>{ const opt=document.createElement("option"); opt.value=String(idx);
+    PLAN.forEach((d,idx)=>{ 
+      const opt=document.createElement("option"); opt.value=String(idx);
       opt.textContent = d.key==="Rest2" ? "Rest (2)" : (d.key==="RestOpt" ? "Optional Rest" : d.key);
       sel.appendChild(opt);
     });
@@ -210,9 +262,13 @@
 
   function renderExercises(){
     const day=PLAN[state.pointer];
+    ensureDraftForDay(day.key);
+
     $("todayLabel").textContent = day.key==="Rest2" ? "Rest" : (day.key==="RestOpt" ? "Optional Rest" : day.key);
     $("progressLabel").textContent = `${state.pointer+1}/${PLAN.length}`;
-    $("dateInput").value = $("dateInput").value || todayISO();
+    
+    $("dateInput").value = state.draft[day.key].logDate || todayISO();
+    $("sessionNotes").value = state.draft[day.key].textNotes || "";
 
     const area=$("exercisesArea"); area.innerHTML="";
     const header=document.createElement("div");
@@ -231,8 +287,6 @@
       rest.innerHTML=`<div class="ex-title">No lifting today.</div><div class="small muted">Do Zone 2 (30 min). Mobility optional. Save session if you want it in history.</div>`;
       area.appendChild(rest); return;
     }
-
-    ensureDraftForDay(day.key);
 
     day.exercises.forEach(ex=>{
       const exWrap=document.createElement("div"); exWrap.className="exercise";
@@ -277,8 +331,10 @@
     let s=`${h.dayTitle}\n${h.date}\n\n`;
     if(h.entries){
       for(const [ex,sets] of Object.entries(h.entries)){
-        const line=sets.filter(x=>(x.w||x.r)).map((x,i)=>`#${i+1} ${x.w||"—"}${state.units} x ${x.r||"—"}${x.n?` (${x.n})`:""}`).join(" | ");
-        s += `${ex}: ${line}\n`;
+        if(Array.isArray(sets)){
+          const line=sets.filter(x=>(x.w||x.r)).map((x,i)=>`#${i+1} ${x.w||"—"}${state.units} x ${x.r||"—"}${x.n?` (${x.n})`:""}`).join(" | ");
+          if(line.length) s += `${ex}: ${line}\n`;
+        }
       }
     }
     if(h.notes) s += `\nNotes: ${h.notes}\n`;
@@ -316,8 +372,10 @@
         const action=btn.getAttribute("data-action");
         const id=btn.getAttribute("data-id");
         if(action==="delete"){
-          state.history = state.history.filter(h=>h.id!==id);
-          saveState(state); renderHistory();
+          if(confirm("Delete this session from history?")){
+            state.history = state.history.filter(h=>h.id!==id);
+            saveState(state); renderHistory();
+          }
         }else if(action==="view"){
           const h=state.history.find(x=>x.id===id);
           if(h) alert(formatSessionForAlert(h));
@@ -329,53 +387,66 @@
   $("prevBtn").addEventListener("click",()=>setPointer(state.pointer-1));
   $("nextBtn").addEventListener("click",()=>setPointer(state.pointer+1));
   $("daySelect").addEventListener("change",(e)=>setPointer(parseInt(e.target.value,10)));
-
   $("unitsSelect").addEventListener("change",(e)=>{ state.units=e.target.value; saveState(state); render(); });
   $("restDayMode").addEventListener("change",(e)=>{ state.restMode=e.target.value; saveState(state); });
 
+  $("dateInput").addEventListener("input", (e) => {
+    const day = PLAN[state.pointer];
+    ensureDraftForDay(day.key);
+    state.draft[day.key].logDate = e.target.value;
+    saveState(state);
+  });
+
+  $("sessionNotes").addEventListener("input", (e) => {
+    const day = PLAN[state.pointer];
+    ensureDraftForDay(day.key);
+    state.draft[day.key].textNotes = e.target.value;
+    saveState(state);
+  });
+
   $("resetTodayBtn").addEventListener("click",()=>{
     const day=PLAN[state.pointer];
-    ensureDraftForDay(day.key);
-    state.draft[day.key]={};
+    state.draft[day.key]={ textNotes: "", logDate: todayISO() };
     saveState(state);
     renderExercises();
   });
 
   $("saveSessionBtn").addEventListener("click",()=>{
     const day=PLAN[state.pointer];
+    ensureDraftForDay(day.key);
     const date=$("dateInput").value || todayISO();
     const notes=$("sessionNotes").value?.trim() || "";
     const entries={};
-    ensureDraftForDay(day.key);
+    
     if(day.exercises.length){
       day.exercises.forEach(ex=>{
         const sets=(state.draft[day.key][ex.name]||[]).map(x=>({w:x.w||"", r:x.r||"", n:x.n||""}));
         entries[ex.name]=sets;
       });
     }
-
+    
+    const generatedId = crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2, 9));
+    
     const session = {
-      id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())+Math.random().toString(16).slice(2)),
+      id: generatedId,
       date, dayKey: day.key, dayTitle: day.title,
       entries: day.exercises.length ? entries : {}, notes
     };
-
+    
     state.history.push(session);
+    state.draft[day.key]={ textNotes: "", logDate: todayISO() };
     saveState(state);
-    $("sessionNotes").value="";
-    renderHistory();
+    
+    render();
     alert("Session saved ✅");
   });
 
   $("exportBtn").addEventListener("click",()=>{
     const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
     const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;
+    const a=document.createElement("a"); a.href=url;
     a.download=`dustin_workout_tracker_backup_${todayISO()}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
   });
 
@@ -388,18 +459,15 @@
       if(!incoming || typeof incoming!=="object" || !("history" in incoming)){
         alert("That file doesn't look like a valid backup."); return;
       }
-      state=incoming;
-      saveState(state);
-      render();
-      alert("Imported ✅");
+      state=incoming; saveState(state); render(); alert("Imported ✅");
     }catch{ alert("Import failed. Make sure it's a valid JSON backup."); }
   });
 
   $("wipeAllBtn").addEventListener("click",()=>{
     if(!confirm("Wipe ALL saved data on this device? This cannot be undone.")) return;
+    if(!confirm("Are you absolutely sure? Your entire history will be permanently deleted.")) return;
     state = JSON.parse(JSON.stringify(defaultState));
-    saveState(state);
-    render();
+    saveState(state); render();
   });
 
   function render(){
