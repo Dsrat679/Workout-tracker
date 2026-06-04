@@ -50,7 +50,7 @@
     <div class="row" style="justify-content: space-between;">
       <div>
         <div class="pill"><strong>Today:</strong> <span id="todayLabel">—</span></div>
-        <div class="small muted" style="margin-top:6px;">Rotation: Chest/Back → Back/Rear Delts → Rest → Legs → Shoulders → Rest → Arms → (Optional Rest)</div>
+        <div class="small muted" style="margin-top:6px;">Rotation: Chest Day → Back/Rear Delts → Rest → Legs → Shoulders → Rest → Arms → (Optional Rest)</div>
       </div>
       <div class="row">
         <button class="btn secondary" id="prevBtn">← Previous</button>
@@ -134,14 +134,13 @@
   const PLAN = [
     {
       key: "Chest",
-      title: "Chest & Upper Back Superset (15 sets)",
-      notes: "High Fat-Burn Phase. Move immediately from exercise A1 to A2, and B1 to B2 to keep heart rate elevated. Rest 45s after the pair.",
+      title: "Chest Day (16 sets)",
+      notes: "Shred Phase. Control the negative phase completely, keep rest transitions under strict management, and execute each movement with perfect mechanical intent.",
       exercises: [
-        { name: "A1. High-to-Low Cable Fly", sets: 4, repRange: "12–15" },
-        { name: "A2. Seated Cable Row (Wide Grip)", sets: 4, repRange: "10–12" },
-        { name: "B1. Machine Chest Press", sets: 3, repRange: "10–12" },
-        { name: "B2. Single-Arm Cable Lat Pull-In", sets: 3, repRange: "12–15" },
-        { name: "C1. Cable Straight-Arm Pulldown", sets: 1, repRange: "20 / Burnout" }
+        { name: "Machine Pec Fly", sets: 4, repRange: "12–15 (Stretch & 1s pause at contraction)" },
+        { name: "Machine Chest Press", sets: 4, repRange: "8–10 (Strongest pressing angle for mid-pec)" },
+        { name: "Incline Machine Press", sets: 4, repRange: "10–12 (Upper chest focus; adjust seat for deep stretch)" },
+        { name: "Cable Low-to-High Fly", sets: 4, repRange: "12–15 (Upper/inner chest; keep proud chest, avoid traps)" }
       ]
     },
     {
@@ -203,7 +202,7 @@
     {
       key: "RestOpt",
       title: "Optional Rest / Zone 2 Only",
-      notes: "Check your baseline recovery markers. If you feel fully charged, loop right back into the Chest & Back superset phase.",
+      notes: "Check your baseline recovery markers. If you feel fully charged, loop right back into the Chest Day phase.",
       exercises: []
     }
   ];
@@ -444,7 +443,7 @@
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a"); a.href=url;
     a.download=`dustin_workout_tracker_backup_${todayISO()}.json`;
-    document.body.appendChild(a); a.click(); a.remove();
+    document.body.appendChild(a); a.click(); remove();
     URL.revokeObjectURL(url);
   });
 
