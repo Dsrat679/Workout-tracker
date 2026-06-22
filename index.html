@@ -50,7 +50,7 @@
     <div class="row" style="justify-content: space-between;">
       <div>
         <div class="pill"><strong>Today:</strong> <span id="todayLabel">—</span></div>
-        <div class="small muted" style="margin-top:6px;">Rotation: Chest Day → Back/Rear Delts → Rest → Legs → Shoulders → Rest → Arms → (Optional Rest)</div>
+        <div class="small muted" style="margin-top:6px;">Rotation: Upper A → Lower A → Rest → Upper B → Lower B → Rest → Rest</div>
       </div>
       <div class="row">
         <button class="btn secondary" id="prevBtn">← Previous</button>
@@ -133,76 +133,71 @@
 <script>
   const PLAN = [
     {
-      key: "Chest",
-      title: "Chest Day (16 sets)",
-      notes: "Shred Phase. Control the negative phase completely, keep rest transitions under strict management, and execute each movement with perfect mechanical intent.",
+      key: "Upper A",
+      title: "Monday: Upper Body A",
+      notes: "High-intensity mechanical tension. Run every working set to absolute failure. Pin shoulder blades back and control the eccentric phase cleanly.",
       exercises: [
-        { name: "Machine Pec Fly", sets: 4, repRange: "12–15 (Stretch & 1s pause at contraction)" },
-        { name: "Machine Chest Press", sets: 4, repRange: "8–10 (Strongest pressing angle for mid-pec)" },
-        { name: "Incline Machine Press", sets: 4, repRange: "10–12 (Upper chest focus; adjust seat for deep stretch)" },
-        { name: "Cable Low-to-High Fly", sets: 4, repRange: "12–15 (Upper/inner chest; keep proud chest, avoid traps)" }
+        { name: "1. Convergent Machine Incline Press", sets: 2, repRange: "6–9" },
+        { name: "2. Chest-Supported Neutral Grip Machine Row", sets: 2, repRange: "8–10" },
+        { name: "3. Standing Mid-Cable Fly / Crossover", sets: 2, repRange: "10–12" },
+        { name: "4. Cable Lat Pulldown (Single-Arm or Wide)", sets: 2, repRange: "8–10" },
+        { name: "5. Cable Lateral Raises (Behind-the-Back)", sets: 3, repRange: "12–15" },
+        { name: "6. Bicep Cable Curl + Overhead Tricep Ext. (Superset)", sets: 2, repRange: "10–12" }
       ]
     },
     {
-      key: "Back",
-      title: "Back & Rear Delt Focus (14 sets)",
-      notes: "Drive hard with the elbows, not your hands. Keep tension constant on the cables—do not let the weight stack slam.",
+      key: "Lower A",
+      title: "Tuesday: Lower Body A",
+      notes: "Quad dominance and structural hip control. No lower back loading. Keep movement continuous and precise.",
       exercises: [
-        { name: "A1. Wide-Grip Cable Pulldown", sets: 4, repRange: "10–12" },
-        { name: "A2. Cable Rear Delt Fly (Reverse Fly)", sets: 4, repRange: "15–20" },
-        { name: "B1. Close-Grip Cable Row (V-Bar)", sets: 3, repRange: "10–12" },
-        { name: "B2. Cable Face Pull", sets: 3, repRange: "15–20" }
+        { name: "1. Leg Press (High Foot Placement)", sets: 2, repRange: "8–10" },
+        { name: "2. Seated Leg Extensions", sets: 3, repRange: "10–12" },
+        { name: "3. Lying or Seated Leg Curl", sets: 3, repRange: "8–10" },
+        { name: "4. Standing or Seated Machine Calf Raises", sets: 3, repRange: "12–15" },
+        { name: "5. Hanging Knee Raises or Decline Abs", sets: 3, repRange: "Failure" }
       ]
     },
     {
-      key: "Rest",
-      title: "Rest / Zone 2 Only",
-      notes: "30 min Zone 2 cardio (treadmill incline walk or stationary bike). Mobility optional. Keep moving to assist fat loss.",
+      key: "Rest 1",
+      title: "Wednesday: Rest / Active Recovery Only",
+      notes: "30 min Zone 2 cardio (treadmill incline walk or bike). Mobility focus. Assist fat loss and clear muscle system inflammation.",
       exercises: []
     },
     {
-      key: "Legs",
-      title: "Legs - Pure Machine & Cable (16 sets)",
-      notes: "100% lower-back safe. Control the negatives smoothly. Keep rest down to 60s max to maintain high metabolic output.",
+      key: "Upper B",
+      title: "Thursday: Upper Body B",
+      notes: "Altered push angles and upper lat width emphasis. Maximize peak muscle contraction squeezes.",
       exercises: [
-        { name: "A1. Leg Press (Machine)", sets: 4, repRange: "12–15" },
-        { name: "B1. Cable Goblet Squat (Heels Elevated)", sets: 4, repRange: "10–12" },
-        { name: "C1. Machine Seated Leg Curl", sets: 4, repRange: "12–15" },
-        { name: "D1. Machine Leg Extension", sets: 4, repRange: "12–15" }
+        { name: "1. Convergent Flat Chest Press Machine", sets: 2, repRange: "6–9" },
+        { name: "2. Wide-Grip Lat Pulldown or Seated Cable Row", sets: 2, repRange: "8–10" },
+        { name: "3. Machine Shoulder Press (Convergent/Cable)", sets: 2, repRange: "8–10" },
+        { name: "4. Single-Arm Cable Low-to-High Fly", sets: 2, repRange: "10–12" },
+        { name: "5. Cable Face Pulls (with Rope)", sets: 3, repRange: "12–15" },
+        { name: "6. Tricep Pushdown + Incline Cable Hammer Curl (Superset)", sets: 2, repRange: "10–12" }
       ]
     },
     {
-      key: "Shoulders",
-      title: "Shoulders - Pure Cable Burn (14 sets)",
-      notes: "Cables keep mechanical tension completely locked at the bottom where dumbbells drop off. Prioritize execution rhythm.",
+      key: "Lower B",
+      title: "Friday: Lower Body B",
+      notes: "Posterior chain dominance. Start fresh on hamstrings to bring maximum training intensity into structural tissue recovery.",
       exercises: [
-        { name: "A1. Machine Overhead Shoulder Press", sets: 4, repRange: "10–12" },
-        { name: "B1. Behind-Back Cable Lateral Raise", sets: 4, repRange: "12–15 / side" },
-        { name: "C1. Cable Cross-Over Y-Raise", sets: 3, repRange: "15–20" },
-        { name: "D1. Cable Face Pull (High Pulley)", sets: 3, repRange: "15–20" }
+        { name: "1. Seated or Lying Leg Curl (Hams First)", sets: 3, repRange: "8–10" },
+        { name: "2. Hack Squat Machine or Pendulum Squat", sets: 2, repRange: "8–10" },
+        { name: "3. Machine Leg Press (Low & Tight Foot Placement)", sets: 2, repRange: "10–12" },
+        { name: "4. Seated Calf Raises (Soleus Focus)", sets: 3, repRange: "12–15" },
+        { name: "5. Cable Crunch / Rope Pulldowns", sets: 3, repRange: "Failure" }
       ]
     },
     {
-      key: "Rest2",
-      title: "Rest / Zone 2 Only",
-      notes: "30 min Zone 2. Focus on internal hydration, recovery protocols, and keeping up daily baseline activity steps.",
+      key: "Rest 2",
+      title: "Saturday: Rest / Tissue Repair",
+      notes: "Deep rest day. Allow central nervous system fatigue to clear out entirely. Track step count targets.",
       exercises: []
     },
     {
-      key: "Arms",
-      title: "Arms - Antagonist Cable Supersets (14 sets)",
-      notes: "Zero rest between movements inside the superset block. Keep your shoulders pinned back and elbows locked in place.",
-      exercises: [
-        { name: "A1. Cable EZ-Bar Bicep Curl", sets: 4, repRange: "10–12" },
-        { name: "A2. Cable Rope Tricep Pushdown", sets: 4, repRange: "12–15" },
-        { name: "B1. Cable Rope Hammer Curl", sets: 3, repRange: "10–12" },
-        { name: "B2. Cable Overhead Tricep Extension", sets: 3, repRange: "12–15" }
-      ]
-    },
-    {
-      key: "RestOpt",
-      title: "Optional Rest / Zone 2 Only",
-      notes: "Check your baseline recovery markers. If you feel fully charged, loop right back into the Chest Day phase.",
+      key: "Rest 3",
+      title: "Sunday: Rest / Preparation",
+      notes: "Internal hydration checking and nutrition prep for the week. Rest day meal structural alignment.",
       exercises: []
     }
   ];
@@ -241,7 +236,7 @@
     const sel=$("daySelect"); sel.innerHTML="";
     PLAN.forEach((d,idx)=>{ 
       const opt=document.createElement("option"); opt.value=String(idx);
-      opt.textContent = d.key==="Rest2" ? "Rest (2)" : (d.key==="RestOpt" ? "Optional Rest" : d.key);
+      opt.textContent = d.key;
       sel.appendChild(opt);
     });
     sel.value=String(state.pointer);
@@ -261,7 +256,7 @@
     const day=PLAN[state.pointer];
     ensureDraftForDay(day.key);
 
-    $("todayLabel").textContent = day.key==="Rest2" ? "Rest" : (day.key==="RestOpt" ? "Optional Rest" : day.key);
+    $("todayLabel").textContent = day.key;
     $("progressLabel").textContent = `${state.pointer+1}/${PLAN.length}`;
     
     $("dateInput").value = state.draft[day.key].logDate || todayISO();
@@ -443,7 +438,7 @@
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a"); a.href=url;
     a.download=`dustin_workout_tracker_backup_${todayISO()}.json`;
-    document.body.appendChild(a); a.click(); remove();
+    document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
   });
 
@@ -478,4 +473,5 @@
   render();
 </script>
 </body>
+</html>
 </html>
